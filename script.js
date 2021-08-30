@@ -1,67 +1,87 @@
 const tanah = document.querySelectorAll(".tanah")
 const tikus = document.querySelectorAll(".tikus")
 const papan = document.querySelector(".papan-skor")
-const pop = document.querySelector("#pop")
+const btnStart = document.querySelector('.start')
+const pop = new Audio('jancok.wav')
 
-
-let tanahsebelumnya;
+let tanahSebelumnya;
 let selesai;
 let nilai;
 
-
-
-function tanahrandom(tanah){
-  const t = Math.floor(Math.random()*tanah.length)
+const tanahRandom = (tanah) => {
+  const t = Math.floor(Math.random() * tanah.length)
   const random = tanah[t]
   
-   if (random == tanahsebelumnya){
-     tanahrandom(tanah);
-   }
+  if (random == tanahSebelumnya){
+    return tanahRandom(tanah);
+  }
    
-   tanahsebelumnya = random
-   
+  tanahSebelumnya = random
+
   return random
 }
 
-function waktu(min,max){
-  return Math.round(Math.random() * (max-min) + min );
+const waktu = (min, max) => {
+  return Math.round(Math.random() * (max - min) + min);
 }
 
+const playAudio = () => {
+  pop.pause();
+  pop.play();
+}
 
+const skor = (trandom) => {
+  nilai++;
+  console.log(nilai)
+  papan.innerHTML = nilai
+  trandom.classList.remove("muncul")
+  playAudio()
+}
 
-function muncultikus(){
-  const trandom = tanahrandom(tanah);
+let timer;
+
+const munculTikus = () => {
+  const trandom = tanahRandom(tanah);
   trandom.classList.add("muncul")
-  const wrandom = waktu(300,1500)
+  const wrandom = waktu(300, 1500)
   
+  trandom.addEventListener('click', (e) => {
+    if (e.target.classList.contains('muncul')) skor(trandom);
+  });
   
-  setTimeout(function() {
+  timer = setTimeout(() => {
     trandom.classList.remove("muncul")
-    if(!selesai){
-        muncultikus();
+    if (!selesai) {
+      munculTikus();
     }
   }, wrandom);
 }
 
+let run = false
 
-function waktumain(){
-  nilai = 0
-  papan.textContent = 0
-  selesai = false
-  muncultikus();
-  setTimeout(function() {
-   selesai = true
-  }, 100000);
-}
+btnStart.addEventListener('click', () => {
+  if (run == false){
+    nilai = 0
+    papan.innerHTML = 0
+    btnStart.innerHTML = '<i class="fas fa-stop"></i> Stop'
+    btnStart.classList.replace('btn-primary', 'btn-danger')
+    selesai = false
+    run = true
+    
+    munculTikus();
 
-function skor() {
-  nilai++;
-  papan.textContent = nilai
-  this.parentNode.classList.remove(".muncul")
-  pop.play();
-}
-
-
-tikus.forEach(t => {
-  t.addEventListener('click',skor)
-})
+    setTimeout(() => {
+      selesai = true
+      run = false
+      btnStart.innerHTML = '<i class="fas fa-play"></i> Mulai'
+      btnStart.classList.replace('btn-danger', 'btn-primary')
+      clearTimeout(timer)
+    }, 60000);
+  } else if (run == true) {
+    selesai = true
+    btnStart.innerHTML = '<i class="fas fa-play"></i> Mulai'
+    btnStart.classList.replace('btn-danger', 'btn-primary')
+    clearTimeout(timer)
+    run = false
+  }
+});

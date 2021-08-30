@@ -1,43 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 body {
-  background-color: #ff5029;
+  font-family: 'Poppins', sans-serif;
+  background-color: #F6AE99;
 }
 
-h1 {
-  text-align: center;
-}
-
-h2 {
-  text-align: center;
-}
-
-h3 {
- 
-  text-align: center;
-}
-
-
-h4 {
- 
-  text-align: center;
-}
-
-
-p {
-  text-align: center;
-}
-
-
-.button {
-  display: block;
-  margin: auto;
+h1, h2, h3, h6 {
+  font-weight: bold;
 }
 
 .container {
   width: 300px;
   margin: auto;
 }
-
 
 .tanah {
   position: relative;
@@ -48,7 +23,6 @@ p {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-
 
 .tanah::after {
   content: '';
@@ -74,5 +48,3 @@ p {
 .tanah.muncul .tikus {
   top: -8px;
 }
-
-  
