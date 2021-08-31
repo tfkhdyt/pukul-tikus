@@ -30,7 +30,7 @@ h1, h2, h3, h6 {
   width: 100px;
   height: 90px;
   position: absolute;
-  background: url(tanah.png) bottom center no-repeat;
+  background: url(../img/tanah.png) bottom center no-repeat;
   background-size: 90%;
   top: 20px;
 }
@@ -38,7 +38,7 @@ h1, h2, h3, h6 {
 .tikus {
   width: 100px;
   height: 100px;
-  background: url(tikus.png) bottom center no-repeat;
+  background: url(../img/tikus.png) bottom center no-repeat;
   position: absolute;
   background-size: 80%;
   top: 40px;

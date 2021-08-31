@@ -2,7 +2,7 @@ const tanah = document.querySelectorAll(".tanah")
 const tikus = document.querySelectorAll(".tikus")
 const papan = document.querySelector(".papan-skor")
 const btnStart = document.querySelector('.start')
-const pop = new Audio('jancok.wav')
+const pop = new Audio('/asset/audio/jancok.wav')
 
 let tanahSebelumnya;
 let selesai;
@@ -17,7 +17,6 @@ const tanahRandom = (tanah) => {
   }
    
   tanahSebelumnya = random
-
   return random
 }
 
